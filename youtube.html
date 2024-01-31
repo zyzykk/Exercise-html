@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+    <title>Youtube.com Clone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<head>
+    <style>
+        .Georgetown{
+            width:100%;
+            max-height:210px;
+            min-height:210px;
+            display:block;
+            object-fit:cover;
+            border-radius:15px}
+
+        .search{
+            flex:1;height:35px;
+            min-width: 150px;
+            border-start-start-radius: 20px;
+            border-end-start-radius: 20px;
+            padding-left:15px;
+            font-size:15px;
+            border-color:rgb(192,192,192);
+            border-style:solid;
+            font-family: Arial, Helvetica, sans-serif;
+            box-shadow:inset 1px 2px 2px rgba(0,0,0,0.05);
+            margin-right:0px;
+            }
+  
+        .Video-title{
+            font-size:16px;
+            display:inline-block;
+            font-weight:600;
+            margin-top: 15px;
+            margin-bottom:10px;
+            font-family:Roboto; line-height:20px;}
+ 
+        .author{
+            color:rgb(96,96,96);
+            margin-top:0; 
+            margin-bottom:0px;
+            font-size:15px;
+            font-family:Roboto;}
+
+        .information{
+            color:rgb(96,96,96);
+            margin-top:5px;
+            margin-bottom:0;
+            font-size:15px;
+            font-family:Roboto;}
+
+        .videobox{
+            display:inline-block;
+            vertical-align:top;
+            max-height:400px;
+            }
+        
+        
+        .videoimage{
+            display:block;
+            min-height:180px;
+            max-height:200px;
+            position:relative;}
+
+        .videoinfo{
+            display:inline-block; 
+            width:95%;
+            vertical-align:top; 
+            margin-top:0px;
+        }
+
+        .authorimage1{
+            display:inline-block; 
+            width:100%;
+            border-radius: 40px;}
+
+        .authorimage{
+            vertical-align: top; 
+            width:100%;
+            margin-top:10px;
+            margin-right:10px}
+
+        .header{
+            height:55px;
+            display:flex;
+            flex-direction: row;
+            justify-content:space-between;
+            margin-bottom:5px;
+            position:fixed;
+            background-color: white;
+            top:0;
+            right:0;
+            left:0;
+            border-bottom-width:1px;
+            border-bottom-style:solid;
+            border-bottom-color:rgb(228,228,228);
+            z-index: 100;
+        }
+        .left-section{
+            width:150px;
+            align-items:flex-end;
+            display:flex;
+            flex-direction: row;
+            justify-content:space-between;
+            align-items: center;
+        }
+
+        .middle-section{
+            display:flex;
+            flex:1;
+            margin-left:70px;
+            margin-right:30px;
+            align-items: center;
+            justify-content:space-between;
+        }
+
+        .right-section{
+            width:180px;
+            display:flex;
+            align-items:center;
+            justify-content: space-between;
+            margin-right:20px;
+            flex-shrink: 0;
+        }
+
+        .icons1{
+            margin-left:24px;
+        }
+        
+        .search-button{
+            height:25px; width:40px;
+        }
+
+        .search-icon{height:41px;width:65px;
+        border-start-end-radius:20px;
+        border-end-end-radius:20px;
+        border-color:rgb(192,192,192);
+        border-style:solid;
+        border-width: 1px;
+        margin-left:-1px;
+        padding-right:12px;
+        margin-right:10px;
+        position:relative;
+        box-shadow: inset 1px 2px 3px rgba(0,0,0,0.05);}
+        
+        .search-icon:hover{
+            background-color: rgb(188,188,188);
+        }
+
+        .searchexp{
+            position: absolute;
+            background-color: gray;
+            color: white;
+            padding-left:4px;
+            padding-right:4px;
+            padding-top:4px;
+            padding-bottom:4px;
+            border-radius:2px;
+            font-size:12px;
+            bottom:-25px;
+            left:-45px;
+            opacity:0;
+            transition: opacity 0.15s;
+            white-space:nowrap;            
+            display:flex;
+            justify-content: center;
+            align-items: center ;
+        }
+        
+        .searchexp1{
+            position: absolute;
+            background-color: gray;
+            color: white;
+            padding-left:4px;
+            padding-right:4px;
+            padding-top:4px;
+            padding-bottom:4px;
+            border-radius:2px;
+            font-size:12px;
+            bottom:-25px;
+            opacity:0;
+            transition: opacity 0.15s;
+            white-space:nowrap;            
+            display:flex;
+            justify-content: center;
+            align-items: center ;
+        }
+
+        .search-icon:hover .searchexp1,
+        .voice-search-button:hover .searchexp,
+        .uploadcontainer:hover .uploadword{
+            opacity:1;
+        }
+
+
+        .search-icon:active{
+            background-color: white;
+        }
+
+        .voice-search-button:hover{
+            background-color: rgb(188,188,188);
+        }
+
+        .voice-search-button{
+            height:40px; width:40px;
+            border-radius:20px;
+            border:none;background-color: rgb(245,245,245);
+            position:relative;
+        }
+
+        .uploadicon{
+            height:26px;
+            position:relative;
+            top:3px;
+        }
+
+        .uploadword{
+            position:absolute;
+            display:flex; background-color: gray;
+            color: white;
+            padding-left:4px;
+            padding-right:4px;
+            padding-top:4px;
+            padding-bottom:4px;
+            border-radius:2px;
+            font-size:12px;
+            bottom:-17px;
+            right:167px;
+            flex-direction: row;
+            opacity: 0;            transition: opacity 0.15s;
+            white-space:nowrap;            
+            justify-content: center;
+            align-items: center 
+        }
+
+        .appicon{
+            height:26px;
+        }
+        
+        .notiicon{
+            height:26px;
+        }
+
+        .noticontainer{
+            position:relative;
+        }
+
+        .notinum{
+            position:absolute;
+            top:-3px;
+            right:-6px;
+            background-color:rgb(200,0,0);
+            color:white;
+            border-radius:10px;
+            border:none;
+            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif,Arial;
+            font-size:12px;
+            padding-left:6px;
+            padding-right:6px;
+            padding-top:2px;
+            padding-bottom:2px;
+        }
+
+        .proficon{
+            height:32px;
+            border-radius:40px;
+        }
+
+        .body{
+            padding-top:70px;
+            background-color:rgb(240,240,240);
+            padding-left:80px;
+        }
+
+        @media (max-width:600px) {
+            .videogrid{
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width:1000px){
+            .videogrid{
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+        }
+
+        @media (min-width:751px) and (max-width:999px) {
+            .videogrid{
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+            .videogrid{
+                border: 2px solid red;
+            }
+        .sidebar{
+            position:fixed;
+            top:54px; 
+            left:0;
+            bottom:0;
+            width:70px; 
+            display:flex;
+            align-items:center;
+            flex-direction: column;
+            background-color: white;
+            z-index:101;
+        }
+
+        .videotime{
+            background-color:black;
+            color:white;
+            position:absolute;
+            bottom:-2px; right:7px;
+            border-radius:2px;
+            font-size:13px;
+            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, Arial, Helvetica, sans-serif;
+            font-weight:500;
+            padding-left:4px;
+            padding-right:4px;
+            padding-top:2px;
+            padding-bottom:2px;
+            vertical-align: middle;
+        }
+
+        .sideicon{
+            height:30%;
+        }
+
+        .sidebardiv{
+            height:90px;
+            column-gap:5px;
+            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size:12px;
+            font-weight:500;
+            justify-content: center;
+            align-items:center;
+            flex-direction:column;
+            display:flex;
+            width:100%;
+            cursor:pointer;
+        }
+
+        .sidebardiv:hover{
+            background-color: lightgray;
+        }
+
+        .sidebardiv img{
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebardiv div{
+            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size:10px;
+        }
+    </style>
+</head>
+<body style="height:2000px; margin:0">
+<div class="header">
+    <div class="left-section"> 
+        <div>
+            <img class = "icons1" src="Channels Pictures/hamburger-menu.svg" width=27px>
+        </div>
+        <div style="margin-left:25px">
+            <img class="icons" src="Channels Pictures/youtube-logo.svg" width=100px>
+        </div>
+    </div>
+    <div class="middle-section">
+        <input class="search" type="text" placeholder="Search">
+        <button class="search-icon">
+            <img class="search-button" src="Channels Pictures/search.svg">
+            <div class="searchexp1"> Search </div>
+        </button>
+        <button class="voice-search-button">
+            <img style="height:24px; margin-top:4px; " src="Channels Pictures/voice-search-icon.svg">
+            <div class="searchexp"> Search with your voice </div>
+        </button>
+    </div>
+
+    <div class="right-section">
+        <div class="uploadcontainer">
+            <img class="uploadicon" src="Channels Pictures/upload.svg">
+             <div class="uploadword">Create </div>
+        </div>
+            <img class="appicon" src="Channels Pictures/youtube-apps.svg">
+        <div class="noticontainer">    
+            <img class="notiicon" src="Channels Pictures/notifications.svg">
+            <div class="notinum"> 3 </div>
+        </div>
+            <img class="proficon" src="Channels Pictures/channels3.jpg">
+    </div>
+</div>  
+
+<div class="sidebar">
+    <div class="sidebardiv">
+        <img class="sideicon" src="Channels Pictures/home.svg">
+        <div>Home</div>
+    </div>
+    <div class="sidebardiv">
+        <img class="sideicon" src="Channels Pictures/explore.svg">
+       <div>Explore</div>
+    </div>
+    <div class="sidebardiv">
+        <img class="sideicon" src="Channels Pictures/subscriptions.svg">
+        <div>Subscriptions</div>
+    </div>
+    <div class="sidebardiv">
+        <img class="sideicon" src="Channels Pictures/originals.svg">
+       <div>Originals</div>
+    </div>
+    <div class="sidebardiv">
+        <img class="sideicon" src="Channels Pictures/youtube-music.svg">
+        <div>Youtube Music</div>
+    </div>
+    <div class="sidebardiv">
+        <img class="sideicon" src="Channels Pictures/library.svg">
+       <div>Library</div>
+    </div>
+</div>
+    
+<div class="body">
+<div class="videogrid" style="
+display:grid;
+grid-template-columns: 1fr 1fr 1fr;
+row-gap:35px;
+column-gap:15px;">
+    <div class="videobox" style="display:grid;
+    grid-template-rows:6fr 4fr;
+    row-gap:10px;">
+        <div class="videoimage">
+            <img class="Georgetown" src="Video Images/Georgetown.jpg">
+            <div class="videotime">14:20</div>
+        </div>
+
+        <div style="
+        display:grid;
+        grid-template-columns: 45px 1fr;
+        column-gap:10px;">
+            <div class="authorimage">
+            <img class="authorimage1" src="Channels Pictures/channels1_profile.jpg"> 
+            </div>
+            <div class="videoinfo">
+                <p class="Video-title">Introduction to Georgetown! Welcome to explore the world of Penang!</p> 
+                <p class="author"> Double JJ</p> 
+                <p class="information"> 3.5M Views &#183; 6 months ago</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="videobox" style="display:grid;
+    grid-template-rows:6fr 4fr;
+    row-gap:10px;">
+        <div class="videoimage">
+            <img class="Georgetown" src="Video Images/Pangkor Island.jpg">
+            <div class="videotime">5:02</div>
+        </div>
+
+        <div style="
+        display:grid;
+        grid-template-columns: 45px 1fr;
+        column-gap:10px;">
+            <div class="authorimage">
+            <img class="authorimage1" src="Channels Pictures/channels2_profile.jpg"> 
+            </div>
+            <div class="videoinfo">
+                <p class="Video-title">Pangkor Island is BEAUTIFUL! Along with the scenery and interesting places to go!</p> 
+                <p class="author"> Three P (3P)</p> 
+                <p class="information"> 1.2M Views &#183; 3 months ago</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="videobox" style="display:grid;
+    grid-template-rows:6fr 4fr;
+    row-gap:10px;">
+        <div class="videoimage">
+            <img class="Georgetown" src="Video Images/Png Bridge 1 .jpeg">
+            <div class="videotime">8:22</div>
+        </div>
+
+        <div style="
+        display:grid;
+        grid-template-columns: 45px 1fr;
+        column-gap:10px;">
+            <div class="authorimage">
+            <img class="authorimage1" src="Channels Pictures/channels3.jpg"> 
+            </div>
+            <div class="videoinfo">
+                <p class="Video-title"> Enormous Penang Bridge Overview.</p> 
+                <p class="author"> OP Traveller</p> 
+                <p class="information"> 455k Views &#183; 2 months ago</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="videobox" style="display:grid;
+    grid-template-rows:6fr 4fr;
+    row-gap:10px;">
+        <div class="videoimage">
+            <img class="Georgetown" src="Video Images/Videoimage4.webp">
+            <div class="videotime">53:20</div>
+        </div>
+
+        <div style="
+        display:grid;
+        grid-template-columns: 45px 1fr;
+        column-gap:10px;">
+            <div class="authorimage">
+            <img class="authorimage1" src="Channels Pictures/channels4_profile.jpg"> 
+            </div>
+            <div class="videoinfo">
+                <p class="Video-title">Best and Popular Kdrama OST | Kdrama OST for Study and Chill</p> 
+                <p class="author"> Dyno Playlist</p> 
+                <p class="information"> 94K Views &#183; 3 months ago</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="videobox" style="display:grid;
+    grid-template-rows:6fr 4fr;
+    row-gap:10px;">
+        <div class="videoimage">
+            <img class="Georgetown" src="Video Images/Videoimage5.webp">
+            <div class="videotime">3:22</div>
+        </div>
+
+        <div style="
+        display:grid;
+        grid-template-columns: 45px 1fr;
+        column-gap:10px;">
+            <div class="authorimage">
+            <img class="authorimage1" src="Channels Pictures/channels5_profile.jpg"> 
+            </div>
+            <div class="videoinfo">
+                <p class="Video-title">Price Tag 'MV'</p> 
+                <p class="author"> blutakw</p> 
+                <p class="information"> 542K Views &#183; 1 year ago</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="videobox" style="display:grid;
+    grid-template-rows:6fr 4fr;
+    row-gap:10px;">
+        <div class="videoimage" >
+            <img class="Georgetown" src="Video Images/Videoimage6.jpg">
+            <div class="videotime">4:50</div>
+        </div>
+
+        <div style="
+        display:grid;
+        grid-template-columns: 45px 1fr;
+        column-gap:10px;">
+            <div class="authorimage">
+            <img class="authorimage1" src="Channels Pictures/channels6_profile.jpg"> 
+            </div>
+            <div class="videoinfo">
+                <p class="Video-title">NewJeans (뉴진스) 'Super Shy' Official MV </p> 
+                <p class="author"> HYPE LABELS</p> 
+                <p class="information"> 3.4M Views &#183; 9 months ago</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
